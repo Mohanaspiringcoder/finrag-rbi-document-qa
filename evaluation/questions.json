@@ -1,0 +1,22 @@
+[
+  {
+    "question": "What is the maximum amount that can be loaded into such PPIs during a month?",
+    "expected_page": 9
+  },
+  {
+    "question": "What is the maximum amount that can remain outstanding in such PPIs at any point in time?",
+    "expected_page": 9
+  },
+  {
+    "question": "What is the monthly limit for funds transfer from such PPIs?",
+    "expected_page": 10
+  },
+  {
+    "question": "What is the maximum cash withdrawal limit for non-bank issued PPIs?",
+    "expected_page": 11
+  },
+  {
+    "question": "What does the term PPI Holder mean?",
+    "expected_page": 2
+  }
+]
