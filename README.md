@@ -442,6 +442,10 @@ cd finrag-rbi-document-qa
 
 ### 2. Create a Virtual Environment
 
+The project was developed and tested with **Python 3.12**.
+
+Verify your Python version:
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
