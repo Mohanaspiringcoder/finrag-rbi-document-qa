@@ -575,15 +575,34 @@ The folders contain examples of:
 
 ## Limitations
 
-This is a small local RAG application, so there are several limitations:
+This project is intentionally designed as a small local RAG application, so the current implementation has several limitations.
 
-- The evaluation set contains only five questions.
-- Only one RBI document is currently indexed.
-- The system retrieves only one chunk.
-- Retrieval quality depends on the embedding model and chunking strategy.
-- The 1B LLM may struggle with complex questions.
-- Complex PDF tables and layouts may require better document parsing.
-- The distance threshold was selected using the current document and evaluation set.
+### Evaluation Scope
+
+- The retrieval evaluation contains only **five questions**.
+- Only **one RBI document** is currently indexed.
+- The current results should therefore be treated as an initial project-level evaluation rather than a general benchmark for RBI documents.
+
+### Retrieval Limitations
+
+- The production retrieval configuration retrieves only **one chunk** for answer generation.
+- Retrieval quality depends on the selected embedding model and chunking strategy.
+- The distance threshold of **1.0** was selected using the current document and evaluation set and would require broader validation on a larger corpus.
+- Questions requiring information from multiple sections may benefit from retrieving and combining multiple chunks.
+
+### Generation Limitations
+
+- The application uses a small **Llama 3.2 1B** model to keep the system lightweight and locally runnable.
+- A small model may struggle with complex, multi-part, or reasoning-heavy questions even when the retrieved context is relevant.
+- The system is designed to ground answers in retrieved document context, but answer quality still depends on both retrieval quality and the capabilities of the local LLM.
+
+### Document Processing Limitations
+
+- The current system works with a single PDF document.
+- Complex PDF tables, layouts, or other difficult document structures may require more advanced extraction techniques.
+- The current evaluation does not comprehensively test noisy, ambiguous, multi-hop, or complex question types.
+
+These limitations define the current scope of the project and provide clear areas for future improvement.
 
 ---
 
