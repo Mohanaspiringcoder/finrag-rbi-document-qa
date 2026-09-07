@@ -129,15 +129,35 @@ The PDF is loaded page by page so that the original page number can be preserved
 
 Each page is split into smaller chunks before creating embeddings.
 
-The final configuration was selected after testing three different chunk sizes.
+Chunk size and overlap can significantly affect retrieval quality, so three configurations were tested on the evaluation set.
+
+![FinRAG Chunking Experiment](docs/chunking_experiment.png)
+
+### Chunking Experiment
 
 | Chunk Size | Overlap | Chunks | Recall@1 | Recall@5 | MRR |
 |---:|---:|---:|---:|---:|---:|
 | 500 | 100 | 266 | 80.00% | 100.00% | 0.900 |
-| 1000 | 200 | 135 | 100.00% | 100.00% | 1.000 |
+| **1000** | **200** | **135** | **100.00%** | **100.00%** | **1.000** |
 | 1500 | 300 | 95 | 60.00% | 80.00% | 0.640 |
 
-The **1000-character configuration** performed best on the evaluation set.
+### Why 1000 / 200 Was Selected
+
+The **1000-character chunk size with 200-character overlap** performed best on the current evaluation set.
+
+It achieved:
+
+- **Recall@1: 100%**
+- **Recall@5: 100%**
+- **MRR: 1.000**
+
+The 500-character configuration retrieved the correct result within the top 5 but performed worse at rank 1.
+
+The 1500-character configuration showed a larger drop in retrieval quality, with Recall@1 decreasing to 60%.
+
+Based on these results, the 1000/200 configuration was selected as the final chunking strategy.
+
+> **Evaluation note:** The experiment is based on the current five-question evaluation set. These results should not be interpreted as a universal optimum for other RBI documents or larger datasets.
 
 ### Final Configuration
 
@@ -146,9 +166,7 @@ Chunk size    : 1000 characters
 Chunk overlap : 200 characters
 Pages         : 40
 Chunks        : 135
-```
 
-The overlap helps preserve context when information continues across chunk boundaries.
 
 ---
 
