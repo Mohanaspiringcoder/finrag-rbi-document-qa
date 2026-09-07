@@ -1,10 +1,35 @@
-# 🏦 RBI Document Q&A — RAG Application
+# 🏦 FinRAG — RBI Document Q&A
 
-A simple local **Retrieval-Augmented Generation (RAG)** application for answering questions from an RBI document.
+A local Retrieval-Augmented Generation (RAG) system for answering questions from an **RBI regulatory document** using semantic retrieval and a small local LLM.
 
-The system retrieves the most relevant document chunk using semantic search and passes only that context to a small local LLM for answer generation.
+The system processes the RBI PDF into searchable chunks, converts them into **Sentence Transformer embeddings**, stores them in **ChromaDB**, retrieves relevant context for a user query, and generates a grounded answer using **Llama 3.2 1B through Ollama**.
 
-Everything runs locally using open-source tools.
+### Key Highlights
+
+- **Document:** RBI Master Directions on Prepaid Payment Instruments
+- **Document size:** 40 pages
+- **Final chunks:** 135
+- **Chunking:** 1,000 characters with 200-character overlap
+- **Embedding model:** `sentence-transformers/all-MiniLM-L6-v2`
+- **Embedding dimension:** 384
+- **Vector database:** ChromaDB
+- **Retrieval:** Top-1 semantic search with distance threshold
+- **LLM:** Llama 3.2 1B running locally through Ollama
+- **Interface:** Streamlit
+- **Retrieval evaluation:** Recall@1, Recall@5 and MRR
+- **Evaluation questions:** 5
+
+### Retrieval Results
+
+| Metric | Result |
+|---|---:|
+| Recall@1 | 100.00% |
+| Recall@5 | 100.00% |
+| MRR | 1.000 |
+
+All five expected pages were retrieved at rank 1 on the current evaluation set.
+
+> **Evaluation note:** These results are based on a small five-question evaluation set and should not be treated as a general benchmark for RBI documents.
 
 ---
 
