@@ -330,15 +330,20 @@ The application allows the user to:
 
 ## Evaluation
 
-The retrieval system was evaluated using five questions based on the RBI document.
+Retrieval quality was evaluated separately from LLM answer generation.
 
-The evaluation questions cover:
+The final 1000-character chunk size with 200-character overlap, selected through the chunking experiment, retrieved the expected source page at rank 1 for all five evaluation questions on the current evaluation set.
 
-1. Monthly PPI loading limit
-2. PPI outstanding limit
-3. Monthly funds transfer limit
-4. Cash withdrawal limit
-5. Definition of PPI Holder
+### Evaluation Questions
+
+| # | Question | Expected Page |
+|---:|---|---:|
+| 1 | What is the maximum amount that can be loaded into such PPIs during a month? | 9 |
+| 2 | What is the maximum amount that can remain outstanding in such PPIs at any point in time? | 9 |
+| 3 | What is the monthly limit for funds transfer from such PPIs? | 10 |
+| 4 | What is the maximum cash withdrawal limit for non-bank issued PPIs? | 11 |
+| 5 | What does the term PPI Holder mean? | 2 |
+
 
 ### Retrieval Evaluation
 
