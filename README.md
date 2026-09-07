@@ -625,16 +625,61 @@ The main lessons were:
 
 ## Future Improvements
 
-Possible improvements include:
+The current implementation provides a simple and measurable foundation for local RBI document question answering. The following improvements would extend the system toward a more robust and production-oriented RAG pipeline.
 
-- Add more RBI documents.
-- Expand the evaluation dataset.
-- Retrieve multiple chunks for questions requiring information from different sections.
-- Experiment with stronger embedding models.
-- Add a reranking stage.
-- Improve PDF and table extraction.
-- Improve answer citations.
-- Add document-level filtering.
+### 1. Expand the RBI Document Corpus
+
+- Index multiple RBI documents instead of a single document.
+- Store document-level metadata such as document name, category, and publication information.
+- Support filtering retrieval by document or regulatory topic.
+
+### 2. Build a Larger Evaluation Dataset
+
+- Increase the number of evaluation questions beyond the current five.
+- Cover different question types, including factual, comparative, multi-part, and out-of-scope questions.
+- Evaluate retrieval across multiple RBI documents and source locations.
+
+### 3. Retrieve Multiple Chunks
+
+- Extend the current Top-1 retrieval approach to retrieve multiple relevant chunks when a question requires information from different parts of a document.
+- Experiment with different values of `k` and evaluate their effect on retrieval quality and answer generation.
+
+### 4. Add Hybrid Retrieval
+
+- Combine semantic vector search with keyword-based retrieval such as BM25.
+- Compare semantic-only and hybrid retrieval on the same evaluation dataset.
+- Use hybrid retrieval for queries where exact regulatory terms or phrases are important.
+
+### 5. Add a Reranking Stage
+
+- Retrieve a larger candidate set from ChromaDB.
+- Apply a cross-encoder or other reranking model to reorder the candidates.
+- Evaluate whether reranking improves Recall@1, Recall@5, and MRR.
+
+### 6. Experiment with Stronger Embedding Models
+
+- Compare `all-MiniLM-L6-v2` with stronger open-source embedding models.
+- Evaluate embedding quality using the same questions, documents, and metrics.
+- Select the model based on retrieval performance and local resource requirements.
+
+### 7. Improve PDF and Table Extraction
+
+- Investigate more robust document parsing for complex PDF layouts.
+- Improve handling of tables, structured content, and information that spans multiple sections.
+- Preserve richer document metadata for more precise source attribution.
+
+### 8. Improve Source Citations
+
+- Return clearer document and page references with every generated answer.
+- Make the retrieved source context easier for users to inspect.
+- Add validation to ensure generated answers are supported by the retrieved document content.
+
+### 9. Expand RAG Evaluation
+
+- Evaluate retrieval and generation separately.
+- Add larger and more diverse test sets.
+- Track retrieval metrics such as Recall@1, Recall@5, and MRR alongside answer-quality metrics.
+- Include failure-case analysis to understand where retrieval or generation breaks down.
 
 ---
 
