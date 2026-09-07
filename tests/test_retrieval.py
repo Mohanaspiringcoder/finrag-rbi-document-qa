@@ -1,9 +1,12 @@
 from src.retrieve import retrieve_documents
 
 
+import numpy as np
+
+
 class FakeEmbeddingModel:
     def encode(self, questions):
-        return [[0.1, 0.2, 0.3]]
+        return np.array([[0.1, 0.2, 0.3]])
 
 
 class FakeCollection:
