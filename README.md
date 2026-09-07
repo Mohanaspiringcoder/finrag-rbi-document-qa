@@ -85,33 +85,31 @@ For each question:
 This keeps the LLM context small, focused, and grounded in the document.
 
 ---
-
 ## Architecture
 
-```text
-                 User Question
-                       │
-                       ▼
-              Sentence Transformer
-                       │
-                       ▼
-                 Query Embedding
-                       │
-                       ▼
-                    ChromaDB
-                 Semantic Search
-                       │
-                       ▼
-              Relevant RBI Chunk
-                       │
-                       ▼
-                Llama 3.2 1B
-                    Ollama
-                       │
-                       ▼
-                    Answer
-```
+The system follows a simple local RAG pipeline with separate flows for document indexing, question answering, and retrieval evaluation.
 
+![FinRAG Architecture](docs/architecture.png)
+
+### Query Flow
+
+1. The user enters an RBI-related question.
+2. The question is converted into an embedding using `all-MiniLM-L6-v2`.
+3. ChromaDB performs semantic similarity search.
+4. The application retrieves the top-ranked chunk.
+5. Results with a distance greater than `1.0` are rejected.
+6. The relevant RBI context is passed to Llama 3.2 1B through Ollama.
+7. The generated answer and source information are displayed through Streamlit.
+
+### Evaluation Flow
+
+The retrieval evaluation uses the same embedding model and ChromaDB collection, but retrieves the top 5 results for each evaluation question.
+
+The system measures:
+
+- Recall@1
+- Recall@5
+- Mean Reciprocal Rank (MRR)
 ---
 
 ## Document
