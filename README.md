@@ -336,7 +336,9 @@ The final 1000-character chunk size with 200-character overlap, selected through
 
 ### Evaluation Questions
 
-| # | Question | Expected Page |
+Expected page values in the evaluation files use the document's zero-based page index. The Streamlit application displays human-readable page numbers by adding 1 to the stored page index.
+
+| # | Question | Expected Page Index |
 |---:|---|---:|
 | 1 | What is the maximum amount that can be loaded into such PPIs during a month? | 9 |
 | 2 | What is the maximum amount that can remain outstanding in such PPIs at any point in time? | 9 |
@@ -557,6 +559,68 @@ python evaluation/chunking_experiment.py
 
 ---
 
+## Docker
+
+The application can also be built and run as a Docker container.
+
+The Docker image contains the Streamlit application, Python dependencies, embedding model, and ChromaDB vector database. The Llama 3.2 1B model continues to run through Ollama on the host machine.
+
+### Build the Docker image
+
+From the project root:
+
+```bash
+docker build -t finrag-rbi-document-qa .
+```
+
+Make sure Ollama is running on the host and is accessible from the container.
+
+```bash
+docker run -d \
+  --name finrag-rbi \
+  -p 8501:8501 \
+  --add-host=host.docker.internal:host-gateway \
+  -e OLLAMA_HOST=http://host.docker.internal:11434 \
+  finrag-rbi-document-qa:latest
+```
+
+Open the application at:
+
+```text
+http://localhost:8501
+```
+
+### Stop the container
+
+```bash
+docker stop finrag-rbi
+```
+
+### Remove the container
+
+```bash
+docker rm finrag-rbi
+```
+
+### Docker architecture
+
+```text
+Browser
+   ↓
+Streamlit container
+   ↓
+RAG retrieval
+   ├── Sentence Transformers
+   └── ChromaDB
+   ↓
+Ollama on host
+   ↓
+Llama 3.2 1B
+   ↓
+Answer
+```
+
+---
 ## Screenshots
 
 Screenshots from the development and evaluation process are stored in:

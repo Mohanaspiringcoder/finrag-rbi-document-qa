@@ -1,0 +1,13 @@
+.git/
+.github/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.log
+.env
+.env.*
+chroma_db/
+data/processed/
+.DS_Store
